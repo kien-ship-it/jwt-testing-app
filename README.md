@@ -44,30 +44,35 @@ The widget implements the SLUGGER Widget SDK specification (v1.1) and communicat
 ## 🚀 Features
 
 ### Authentication Testing
+
 - **PostMessage Reception:** Receives authentication tokens from SLUGGER shell
 - **Token Validation:** Verifies JWT format and decodes user claims
 - **Expiration Tracking:** Real-time countdown to token expiration
 - **Token Refresh:** Request fresh tokens from shell
 
 ### User Information Display
+
 - User ID, email, name
 - Role and team information
 - Admin status
 - Email verification status
 
 ### Token Inspection
+
 - Access token preview and full copy
 - ID token preview and full copy
 - Expiration timestamp with countdown
 - Raw payload inspection
 
 ### API Testing
+
 - Configurable endpoint testing
 - Authenticated request with Bearer token
 - Response display with status and headers
 - Error handling and logging
 
 ### Event Logging
+
 - Real-time event capture
 - Categorized logging (info, success, warning, error)
 - Timestamp tracking
@@ -141,6 +146,7 @@ See [TESTING.md](TESTING.md) for comprehensive testing procedures.
 **Quick Test:**
 
 1. **Standalone Test:**
+
    ```bash
    # Start local server
    python3 -m http.server 8080
@@ -150,8 +156,10 @@ See [TESTING.md](TESTING.md) for comprehensive testing procedures.
    ```
 
 2. **Embedded Test:**
+
    - Deploy to Netlify
    - Add to SLUGGER shell:
+
      ```tsx
      <WidgetFrame
        src="https://your-widget.netlify.app"
@@ -159,6 +167,7 @@ See [TESTING.md](TESTING.md) for comprehensive testing procedures.
        widgetId="jwt-testing-widget"
      />
      ```
+
    - Login to SLUGGER and navigate to widget page
 
 ---
@@ -207,20 +216,24 @@ const data = await response.json();
 ## 🔒 Security
 
 ### Token Storage
+
 - Tokens stored in **memory only** (not localStorage)
 - Automatic cleanup on page refresh
 - No token persistence across sessions
 
 ### Origin Validation
+
 - Validates PostMessage origin against allowlist
 - Rejects unauthorized messages
 - Configurable allowed origins
 
 ### HTTPS Enforcement
+
 - Netlify provides automatic HTTPS
 - Required for clipboard API (token copying)
 
 ### Content Security Policy
+
 - Configured in `netlify.toml`
 - Allows iframe embedding from SLUGGER shell
 - Restricts external scripts
@@ -270,18 +283,21 @@ const sdk = new SluggerWidgetSDK({
 ## 📊 Use Cases
 
 ### Development
+
 - Test JWT token format and structure
 - Validate PostMessage integration
 - Debug authentication flows
 - Verify user claims
 
 ### Integration Testing
+
 - End-to-end authentication testing
 - API endpoint validation
 - CORS configuration verification
 - Performance benchmarking
 
 ### Production Monitoring
+
 - Token expiration tracking
 - Authentication success rate
 - API response times
