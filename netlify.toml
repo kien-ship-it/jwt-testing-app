@@ -1,0 +1,32 @@
+# Build settings
+[build]
+  publish = "."
+  command = "echo 'No build required - static files'"
+
+# Headers for security and CORS
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "ALLOW-FROM *"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Allow embedding in iframes (required for widget)
+    Content-Security-Policy = "frame-ancestors *"
+
+# CORS headers for API calls (if needed)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+
+# Redirect rules (if needed)
+[[redirects]]
+  from = "/api/*"
+  to = "https://slugger-alb-1518464736.us-east-2.elb.amazonaws.com/api/:splat"
+  status = 200
+  force = false
+  # Uncomment if you want to proxy API calls through Netlify
+  # This is optional - widgets can call the API directly

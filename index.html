@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLUGGER JWT Testing Widget</title>
+    <meta name="description" content="Testing widget for SLUGGER platform JWT authentication via PostMessage">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔐 SLUGGER JWT Testing Widget</h1>
+            <p class="subtitle">PostMessage Authentication Test Harness</p>
+        </header>
+
+        <div class="status-card" id="status-card">
+            <div class="status-indicator" id="status-indicator">
+                <span class="pulse"></span>
+                <span id="status-text">Initializing...</span>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <!-- Authentication Status Section -->
+            <section class="card" id="auth-section">
+                <h2>📡 Authentication Status</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Widget ID:</label>
+                        <span id="widget-id" class="value">jwt-testing-widget</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Auth State:</label>
+                        <span id="auth-state" class="value badge badge-pending">Not Authenticated</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Token Expires:</label>
+                        <span id="token-expiry" class="value">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Shell Origin:</label>
+                        <span id="shell-origin" class="value">—</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Information Section -->
+            <section class="card" id="user-section" style="display: none;">
+                <h2>👤 User Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>User ID:</label>
+                        <span id="user-id" class="value mono">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Email:</label>
+                        <span id="user-email" class="value">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Name:</label>
+                        <span id="user-name" class="value">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Role:</label>
+                        <span id="user-role" class="value badge">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Team ID:</label>
+                        <span id="user-team-id" class="value mono">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Team Role:</label>
+                        <span id="user-team-role" class="value">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Admin:</label>
+                        <span id="user-admin" class="value">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Email Verified:</label>
+                        <span id="user-email-verified" class="value">—</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Token Details Section -->
+            <section class="card" id="token-section" style="display: none;">
+                <h2>🔑 Token Details</h2>
+                <div class="token-display">
+                    <div class="token-item">
+                        <label>Access Token (First 50 chars):</label>
+                        <code id="access-token" class="token-preview">—</code>
+                        <button class="btn-copy" onclick="copyToken('access')">📋 Copy Full</button>
+                    </div>
+                    <div class="token-item">
+                        <label>ID Token (First 50 chars):</label>
+                        <code id="id-token" class="token-preview">—</code>
+                        <button class="btn-copy" onclick="copyToken('id')">📋 Copy Full</button>
+                    </div>
+                    <div class="token-item">
+                        <label>Token Expiration:</label>
+                        <code id="token-expiration">—</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Testing Section -->
+            <section class="card" id="api-section" style="display: none;">
+                <h2>🚀 API Testing</h2>
+                <div class="api-tester">
+                    <div class="input-group">
+                        <label for="api-endpoint">API Endpoint:</label>
+                        <input 
+                            type="text" 
+                            id="api-endpoint" 
+                            placeholder="/api/users/me" 
+                            value="/api/users/me"
+                        >
+                    </div>
+                    <div class="button-group">
+                        <button id="test-api-btn" class="btn btn-primary" onclick="testApiCall()">
+                            🔗 Test API Call
+                        </button>
+                        <button class="btn btn-secondary" onclick="requestRefresh()">
+                            🔄 Refresh Tokens
+                        </button>
+                    </div>
+                    <div id="api-response" class="response-container" style="display: none;">
+                        <h3>Response:</h3>
+                        <pre id="api-response-text"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Log Section -->
+            <section class="card">
+                <h2>📝 Event Log</h2>
+                <div class="log-controls">
+                    <button class="btn btn-small" onclick="clearLog()">Clear Log</button>
+                </div>
+                <div id="event-log" class="event-log"></div>
+            </section>
+
+            <!-- Raw Payload Section -->
+            <section class="card">
+                <h2>🔍 Raw Authentication Payload</h2>
+                <pre id="raw-payload" class="raw-payload">Waiting for authentication...</pre>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>SLUGGER Widget SDK v1.1 • <a href="https://github.com/yourusername/jwt-testing-app" target="_blank">Documentation</a></p>
+        </footer>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
